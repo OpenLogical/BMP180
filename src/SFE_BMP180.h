@@ -115,8 +115,10 @@ class SFE_BMP180
 		double c5,c6,mc,md,x0,x1,x2,y0,y1,y2,p0,p1,p2;
 		char _error;
 			//use for non-blocking data reading
-		byte BMP180state = 0;
-		double temp1, press1;
+		byte BMP180state = 0; //use in getBMP180data to switch between data
+			// 0 = startTemp (run once)
+			// 1 = read tempurature data, start pressure conversion (3)
+			// 2 = read pressure data, start temperature conversion
 };
 
 #define BMP180_ADDR 0x77 // 7-bit address
