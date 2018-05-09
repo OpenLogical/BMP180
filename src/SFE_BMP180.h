@@ -75,6 +75,14 @@ class SFE_BMP180
 			// 2 = Received NACK on transmit of address
 			// 3 = Received NACK on transmit of data
 			// 4 = Other error
+		char getConversionStatus(void);
+			//check conversion and return
+			// 0 = free, data reg avaliable
+			// 1 = busy, conversion in progress
+			// 2 = errror reading status
+		char getBMP180data (double &T, double &P);
+			//read Tempurature T and P, non-blocking
+			//it will roate between Tempurature and Pressure
 
 	private:
 	
@@ -106,6 +114,9 @@ class SFE_BMP180
 		uint16_t AC4,AC5,AC6; 
 		double c5,c6,mc,md,x0,x1,x2,y0,y1,y2,p0,p1,p2;
 		char _error;
+			//use for non-blocking data reading
+		byte BMP180state = 0;
+		double temp1, press1;
 };
 
 #define BMP180_ADDR 0x77 // 7-bit address
